@@ -192,7 +192,7 @@ outputs/
 
 3. **Run the script**:
    ```bash
-   python new_one.py
+   python predict.py
    ```
 
 ---
