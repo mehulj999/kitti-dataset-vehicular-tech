@@ -107,6 +107,17 @@ You can tweak the following in the script:
 
 ---
 
+
+## 🧪 How to predict it
+```
+python predict.py \
+  --model fasterrcnn \
+  --image path/to/image.jpg \
+  --weights outputs/fasterrcnn/weights.pth \
+  --classes kaggle/input/kitti-dataset-yolo-format/classes.json
+```
+`Replace fasterrcnn with ssdlite to use the SSDLite model.`
+
 ## 📈 Sample Evaluation Plots
 
 ![Confusion Matrix](outputs/fasterrcnn/confusion_matrix.png)
