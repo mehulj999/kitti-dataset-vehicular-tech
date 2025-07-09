@@ -134,6 +134,22 @@ This is a group project submitted for the subject **Vehicular Technology** at th
 - Ghazale
 - Daniel Alexander
 - Maryam
+- 
+
+---
+
+## 📚 References
+
+- **Faster R-CNN:**  
+  Ren, S., He, K., Girshick, R., & Sun, J. (2015).  
+  *Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks*.  
+  [arXiv:1506.01497](https://arxiv.org/abs/1506.01497)
+
+- **SSDLite / MobileNetV3:**  
+  Howard, A., Sandler, M., Chu, G., et al. (2019).  
+  *Searching for MobileNetV3*.  
+  [arXiv:1905.02244](https://arxiv.org/abs/1905.02244)
+
 
 ---
 
