@@ -33,6 +33,68 @@ Make sure to adjust the paths in the code if your folders are organized differen
 
 ---
 
+## 📥 Download & Label Preparation
+
+### 1. 📥 Download the KITTI Dataset  
+Visit the **KITTI Object Detection** page on the KITTI Vision Benchmark Suite to register and download files:
+
+- **Training images** (`image_2.zip`, ≈12 GB)  
+- **Training labels** (`label_2.zip`, ≈5 MB)
+
+After downloading, extract and organize them like:
+
+```
+kaggle/input/
+└── kitti-dataset/
+    └── training/
+        ├── image_2/     ← Contains KITTI JPEG/PNG images
+        └── label_2/     ← Contains KITTI TXT label files
+```
+
+### 2. 🔄 Convert Labels to YOLO Format
+
+KITTI format uses absolute bounding boxes defined by `[x1, y1, x2, y2]`. YOLO format requires normalized center coordinates `[class, x_center, y_center, width, height]`.
+
+#### Example conversion snippet:
+```python
+def kitti_to_yolo(bbox, img_w, img_h):
+    x1, y1, x2, y2 = bbox
+    xc = (x1 + x2) / 2.0 / img_w
+    yc = (y1 + y2) / 2.0 / img_h
+    w = (x2 - x1) / img_w
+    h = (y2 - y1) / img_h
+    return xc, yc, w, h
+```
+
+#### Automated conversion using a tool:
+Clone a repo like `oberger4711/kitti_for_yolo`:
+
+```bash
+git clone https://github.com/oberger4711/kitti_for_yolo.git
+cd kitti_for_yolo
+pip install -r requirements.txt
+python kitti_label.py   --kitti_label_dir ../kaggle/input/kitti-dataset/training/label_2   --image_dir ../kaggle/input/kitti-dataset/training/image_2   --output_dir ../kaggle/input/kitti-dataset-yolo-format/labels
+```
+
+### 3. ✅ Final Folder Structure
+
+Your project should look like this:
+
+```
+kaggle/input/
+├── kitti-dataset/
+│   └── training/
+│       ├── image_2/       ← original KITTI images
+│       └── label_2/       ← KITTI labels
+└── kitti-dataset-yolo-format/
+    ├── labels/            ← converted YOLO-format labels
+    └── classes.json       ← class ID → class name mapping
+```
+
+Adjust input paths in the script if your structure differs.
+
+---
+
 ## 🧠 Models Used
 
 ### 1. **Faster R-CNN**
@@ -107,14 +169,9 @@ You can tweak the following in the script:
 
 ---
 
-
 ## 🧪 How to predict it
 ```
-python predict.py \
-  --model fasterrcnn \
-  --image path/to/image.jpg \
-  --weights outputs/fasterrcnn/weights.pth \
-  --classes kaggle/input/kitti-dataset-yolo-format/classes.json
+python predict.py   --model fasterrcnn   --image path/to/image.jpg   --weights outputs/fasterrcnn/weights.pth   --classes kaggle/input/kitti-dataset-yolo-format/classes.json
 ```
 `Replace fasterrcnn with ssdlite to use the SSDLite model.`
 
@@ -145,7 +202,6 @@ This is a group project submitted for the subject **Vehicular Technology** at th
 - Ghazale
 - Daniel Alexander
 - Maryam
-- 
 
 ---
 
@@ -160,7 +216,6 @@ This is a group project submitted for the subject **Vehicular Technology** at th
   Howard, A., Sandler, M., Chu, G., et al. (2019).  
   *Searching for MobileNetV3*.  
   [arXiv:1905.02244](https://arxiv.org/abs/1905.02244)
-
 
 ---
 
