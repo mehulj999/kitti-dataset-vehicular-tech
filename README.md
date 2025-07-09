@@ -4,23 +4,44 @@ This project demonstrates training and evaluating two object detection models �
 
 ---
 
-## 📂 Dataset
+## 📂 KITTI Dataset
 
-We use the **KITTI Object Detection** dataset with labels in **YOLO format**. Due to the large size of the dataset, only a subset (1/20th) is used to reduce training time for experimentation.
+The [KITTI Vision Benchmark Suite](http://www.cvlibs.net/datasets/kitti/) is a widely used dataset for autonomous driving and computer vision tasks such as object detection, tracking, and scene understanding.
 
-- Image Path: `kaggle/input/kitti-dataset/data_object_image_2/training/image_2/`
-- Label Path: `kaggle/input/kitti-dataset-yolo-format/labels/`
-- Class Mapping: `kaggle/input/kitti-dataset-yolo-format/classes.json`
+We use the **Object Detection** subset of the KITTI dataset. Due to its size, only 1/20th of the dataset is used in this project for faster training and testing.
 
-> ⚠️ Ensure these paths are valid or adjust them accordingly in the code.
+### 📥 Download Links
+
+- KITTI Raw Data: http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d
+- YOLO-formatted labels (via Kaggle or converted manually)
+
+### 🗂 Folder Structure
+
+The following folder structure is expected:
+```
+kaggle/input/
+├── kitti-dataset/
+│   └── data_object_image_2/
+│       └── training/
+│           └── image_2/             # KITTI training images
+├── kitti-dataset-yolo-format/
+│   ├── labels/                      # YOLO-formatted label text files
+│   └── classes.json                 # Mapping of class IDs to class names
+```
+
+Make sure to adjust the paths in the code if your folders are organized differently.
 
 ---
 
-## 🧠 Models
+## 🧠 Models Used
 
-Two object detection models from PyTorch’s `torchvision` are used:
-- ✅ `Faster R-CNN` with ResNet-50 FPN backbone
-- ✅ `SSDLite` with MobileNetV3 Large backbone
+### 1. **Faster R-CNN**
+Faster R-CNN is a two-stage object detection model that first proposes regions of interest and then classifies objects in those regions. It is known for its **high accuracy** and robustness in complex scenes.
+
+### 2. **SSDLite**
+SSDLite is a lightweight version of the Single Shot MultiBox Detector (SSD) that uses **MobileNetV3** as a backbone. It is optimized for **real-time inference on edge devices** with limited resources.
+
+These models were chosen to compare **accuracy vs. efficiency** in object detection tasks.
 
 ---
 
@@ -63,9 +84,9 @@ outputs/
 
 ## 🧪 How to Run
 
-1. **Install requirements**:
+1. **Install all dependencies** using:
    ```bash
-   pip install torch torchvision matplotlib scikit-learn tqdm
+   pip install -r requirements.txt
    ```
 
 2. **Ensure dataset folders and `classes.json` are placed as expected.**
