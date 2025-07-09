@@ -10,10 +10,47 @@ The [KITTI Vision Benchmark Suite](http://www.cvlibs.net/datasets/kitti/) is a w
 
 We use the **Object Detection** subset of the KITTI dataset. Due to its size, only 1/20th of the dataset is used in this project for faster training and testing.
 
-### 📥 Download Links
+### 📥 Download from Kaggle
 
-- KITTI Raw Data: http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d
-- YOLO-formatted labels (via Kaggle or converted manually)
+You can directly download the KITTI dataset with YOLO-formatted labels from the following Kaggle datasets:
+
+- 🧾 [KITTI Dataset (YOLO Format) by Shreyas Dandekar](https://www.kaggle.com/datasets/shreydan/kitti-dataset-yolo-format)
+- 📷 [KITTI Raw Dataset (Images Only) by Klemen Košir](https://www.kaggle.com/datasets/klemenko/kitti-dataset)
+
+### 🧰 How to Use with Kaggle CLI
+
+Make sure you have the [Kaggle API](https://www.kaggle.com/docs/api) installed and authenticated:
+
+```bash
+pip install kaggle
+```
+
+Place your Kaggle API token (downloaded from your Kaggle account settings) in `~/.kaggle/kaggle.json`, then run:
+
+```bash
+# Download YOLO-formatted labels
+kaggle datasets download -d shreydan/kitti-dataset-yolo-format
+unzip kitti-dataset-yolo-format.zip -d kaggle/input/
+
+# Download raw image dataset (if not included)
+kaggle datasets download -d klemenko/kitti-dataset
+unzip kitti-dataset.zip -d kaggle/input/
+```
+
+This gives you the following structure:
+```
+kaggle/input/
+├── kitti-dataset/
+│   └── data_object_image_2/
+│       └── training/
+│           └── image_2/
+├── kitti-dataset-yolo-format/
+│   ├── labels/
+│   └── classes.json
+```
+
+Once downloaded and extracted, you can run the training script directly.
+
 
 ### 🗂 Folder Structure
 
